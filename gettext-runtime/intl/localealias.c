@@ -27,7 +27,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#if defined _LIBC || defined HAVE___FSETLOCKING
+#if defined _LIBC || HAVE_DECL___FSETLOCKING
 # include <stdio_ext.h>
 #endif
 #include <sys/types.h>
@@ -240,7 +240,7 @@ read_alias_file (const char *fname, int fname_len)
   if (fp == NULL)
     return 0;
 
-#ifdef HAVE___FSETLOCKING
+#if HAVE_DECL___FSETLOCKING
   /* No threads present.  */
   __fsetlocking (fp, FSETLOCKING_BYCALLER);
 #endif
