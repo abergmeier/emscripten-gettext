@@ -230,13 +230,14 @@ AC_DEFUN([gt_INTL_SUBDIR_CORE],
   AC_CHECK_HEADERS([argz.h inttypes.h limits.h unistd.h sys/param.h])
   AC_CHECK_FUNCS([getcwd getegid geteuid getgid getuid mempcpy munmap \
     stpcpy strcasecmp strdup strtoul tsearch uselocale argz_count \
-    argz_stringify argz_next __fsetlocking])
+    argz_stringify argz_next])
 
   dnl Use the *_unlocked functions only if they are declared.
   dnl (because some of them were defined without being declared in Solaris
   dnl 2.5.1 but were removed in Solaris 2.6, whereas we want binaries built
   dnl on Solaris 2.5.1 to run on Solaris 2.6).
   dnl Don't use AC_CHECK_DECLS because it isn't supported in autoconf-2.13.
+  gt_CHECK_DECL([__fsetlocking], [#include <stdio_ext.h>])
   gt_CHECK_DECL([feof_unlocked], [#include <stdio.h>])
   gt_CHECK_DECL([fgets_unlocked], [#include <stdio.h>])
 
